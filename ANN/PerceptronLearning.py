@@ -55,7 +55,7 @@ def init() :
 # 			Weight[i][j] = random.uniform(-10.0, 10.0)
 # 	for i in range(4) :
 # 		Biases[i] = random.uniform(-10.0, 10.0)
-	# give Weight and Biases random initial values
+# 	# give Weight and Biases random initial values
 
 ############################################################
 ###### annotation one of upon can change Neuron number #####
@@ -170,10 +170,9 @@ def WBprint() :
 	print(Biases,file = OutputFile)
 	# ouput the data of Weight and Biases
 
-
 if __name__ == "__main__":
 	TotalTime = 0.0
-	SetRange = 100
+	SetRange = 1000
 	for i in range(1,SetRange+1):
 
 		print(i) # monitor progress
