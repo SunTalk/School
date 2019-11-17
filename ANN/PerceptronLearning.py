@@ -3,17 +3,64 @@ import math
 import random
 import time
 
+##############################
+########## TwoNeuron #########
+##############################
+
 Weight = np.array([
-	[0.0, 0.0, 0.0],
-	[0.0, 0.0, 0.0],
 	[0.0, 0.0, 0.0],
 	[0.0, 0.0, 0.0]
 ])
 Biases = np.array([
-	[0.0],[0.0],[0.0],[0.0]
+	[0.0],[0.0]
 ])
 
-OutputFile = open("ANS.out", "w")
+W = np.array([[0.0],[0.0]])
+B = np.array([[0.0],[1.0]])
+P = np.array([[1.0],[0.0]])
+O = np.array([[1.0],[1.0]])
+
+OutputFile = open("TwoNeuron.out", "w")
+def init() :
+	for i in range(2) :
+		for j in range(3):
+			Weight[i][j] = random.uniform(-10.0, 10.0)
+	for i in range(2) :
+		Biases[i] = random.uniform(-10.0, 10.0)
+	# give Weight and Biases random initial values
+
+##############################
+######### FourNeuron #########
+##############################
+
+# Weight = np.array([
+# 	[0.0, 0.0, 0.0],
+# 	[0.0, 0.0, 0.0],
+# 	[0.0, 0.0, 0.0],
+# 	[0.0, 0.0, 0.0]
+# ])
+# Biases = np.array([
+# 	[0.0],[0.0],[0.0],[0.0]
+# ])
+
+# W = np.array([[1.0],[0.0],[0.0],[0.0]])
+# B = np.array([[0.0],[1.0],[0.0],[0.0]])
+# P = np.array([[0.0],[0.0],[1.0],[0.0]])
+# O = np.array([[0.0],[0.0],[0.0],[1.0]])
+
+# OutputFile = open("FourNeuron.out", "w")
+# def init() :
+# 	for i in range(4) :
+# 		for j in range(3):
+# 			Weight[i][j] = random.uniform(-10.0, 10.0)
+# 	for i in range(4) :
+# 		Biases[i] = random.uniform(-10.0, 10.0)
+	# give Weight and Biases random initial values
+
+############################################################
+###### annotation one of upon can change Neuron number #####
+############################################################
+
 TraningFile = open("training_data.txt","r")
 TestFile = open("testing_data.txt","r")
 
@@ -21,19 +68,6 @@ Data = list()
 Test = list()
 TotalError = 0
 EpochLimit = 10000
-
-W = np.array([[1.0],[0.0],[0.0],[0.0]])
-B = np.array([[0.0],[1.0],[0.0],[0.0]])
-P = np.array([[0.0],[0.0],[1.0],[0.0]])
-O = np.array([[0.0],[0.0],[0.0],[1.0]])
-
-def init() :
-	for i in range(4) :
-		for j in range(3):
-			Weight[i][j] = random.uniform(-10.0, 10.0)
-	for i in range(4) :
-		Biases[i] = random.uniform(-10.0, 10.0)
-	# give Weight and Biases random initial values
 
 def Turn_to_Martix(k) :
 	if k == "W" :
@@ -126,7 +160,7 @@ def StartTest() :
 			print("", file=OutputFile)
 		kase += 1
 	# run Test data and print it
-	print("Error Number : {}".format(ErrNum), file=OutputFile)
+	print("\nError Number : {}".format(ErrNum), file=OutputFile)
 	TotalError += ErrNum
 
 def WBprint() :
@@ -139,22 +173,30 @@ def WBprint() :
 
 if __name__ == "__main__":
 	TotalTime = 0.0
-	for i in range(1,1001):
+	SetRange = 100
+	for i in range(1,SetRange+1):
+
 		print(i) # monitor progress
 		print("Test {}:".format(i), file = OutputFile)
+
 		init()
+		print("\nInitial:", file = OutputFile)
 		WBprint()
+
 		tStart = time.time()
 		Traning()
 		tEnd = time.time()
 		TotalTime += (tEnd - tStart)
+		print("\nAfter Traning:", file = OutputFile)
 		WBprint()
-		print("End Epoch: {}".format(Epoch), file=OutputFile)
+
+		print("\nEnd Epoch: {}".format(Epoch), file=OutputFile)
 		print("Speed: {}".format(tEnd - tStart), file=OutputFile)
 		StartTest()
 		print("End Test: {}".format(i), file = OutputFile)
 		print("--------------------------------------------------", file = OutputFile)
+	
 	print("Total Error: {}".format(TotalError), file = OutputFile)
-	print("Avg Error: {}".format(TotalError/1000), file = OutputFile)
+	print("Avg Error: {}".format(TotalError/SetRange), file = OutputFile)
 	print("Total Time: {} sec".format(TotalTime), file = OutputFile)
-	print("Avg Time: {} sec".format(TotalTime/1000), file = OutputFile)
+	print("Avg Time: {} sec".format(TotalTime/SetRange), file = OutputFile)
