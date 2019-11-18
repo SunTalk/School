@@ -20,7 +20,7 @@ B = np.array([[0.0],[1.0]])
 P = np.array([[1.0],[0.0]])
 O = np.array([[1.0],[1.0]])
 
-OutputFile = open("TwoNeuron.out", "w")
+OutputFile = open("TwoNeuron.out", "a")
 def init() :
 	for i in range(2) :
 		for j in range(3):
@@ -48,7 +48,7 @@ def init() :
 # P = np.array([[0.0],[0.0],[1.0],[0.0]])
 # O = np.array([[0.0],[0.0],[0.0],[1.0]])
 
-# OutputFile = open("FourNeuron.out", "w")
+# OutputFile = open("FourNeuron.out", "a")
 # def init() :
 # 	for i in range(4) :
 # 		for j in range(3):
@@ -66,7 +66,11 @@ TestFile = open("testing_data.txt","r")
 
 Data = list()
 Test = list()
+Result = list()
+
+ErrNum = 0
 TotalError = 0
+Epoch = 0
 EpochLimit = 10000
 
 def Turn_to_Martix(k) :
@@ -92,7 +96,6 @@ def NeedUpdate(e):
 	return False
 	# check if it need to update the Weight and Biases
 
-Epoch = 0
 def Traning() :
 	global Weight
 	global Biases
@@ -140,7 +143,7 @@ def Decide(K) :
 def StartTest() :
 	global TotalError
 
-	kase = 1;
+	
 	for i in TestFile.readlines() :
 		S,T,W = i.split()
 		Obj = np.array([[float(S)],[float(T)],[float(W)]])
@@ -148,20 +151,28 @@ def StartTest() :
 	# read Test Data
 
 	ErrNum = 0
+	kase = 1
+	Result.clear()
 	for i in Test :
 		now = Weight.dot(i) + Biases
 		for j in now :
 			j[0] = hardlim(j[0])
-		result = Decide(now)
-		if result == "Error" :
+		res = Decide(now)
+		if res == "Error" :
 			ErrNum += 1
-		print("{}[{}]".format(kase, result), end = " " , file = OutputFile)
-		if kase%10 == 0 :
-			print("", file=OutputFile)
+		Result.append([kase,res])
 		kase += 1
-	# run Test data and print it
-	print("\nError Number : {}".format(ErrNum), file=OutputFile)
+	# run Test data
 	TotalError += ErrNum
+
+def TestPrint() :
+
+	for i in Result:
+		print("{}[{}]".format(i[0], i[1]), end = " " , file = OutputFile)
+		if i[0]%10 == 0 :
+			print("", file=OutputFile)
+	print("\nError Number : {}".format(ErrNum), file=OutputFile)
+	# print results for Test data
 
 def WBprint() :
 	print("Weight:",file = OutputFile)
@@ -170,7 +181,15 @@ def WBprint() :
 	print(Biases,file = OutputFile)
 	# ouput the data of Weight and Biases
 
+def CheckFile() :
+	if len(Biases) == 2 :
+		OutputFile = open("TwoNeuron.out", "w")
+	if len(Biases) == 4 :
+		OutputFile = open("FourNeuron.out", "w")
+	# let draw.py can't clear the file
+
 if __name__ == "__main__":
+	CheckFile()
 	TotalTime = 0.0
 	SetRange = 1000
 	for i in range(1,SetRange+1):
@@ -192,6 +211,7 @@ if __name__ == "__main__":
 		print("\nEnd Epoch: {}".format(Epoch), file=OutputFile)
 		print("Speed: {}".format(tEnd - tStart), file=OutputFile)
 		StartTest()
+		TestPrint()
 		print("End Test: {}".format(i), file = OutputFile)
 		print("--------------------------------------------------", file = OutputFile)
 	
