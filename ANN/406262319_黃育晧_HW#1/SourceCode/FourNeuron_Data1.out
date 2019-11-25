@@ -1,0 +1,38 @@
+Test 1:
+
+Initial:
+Weight:
+[[0. 0.]
+ [0. 0.]
+ [0. 0.]
+ [0. 0.]]
+Biases:
+[[0.]
+ [0.]
+ [0.]
+ [0.]]
+
+After Traning:
+Weight:
+[[ 2.  3.]
+ [ 2. -1.]
+ [-1.  2.]
+ [-2. -2.]]
+Biases:
+[[-5.]
+ [-4.]
+ [-4.]
+ [-4.]]
+Learning Rate: 1
+
+End Epoch: 14
+Speed: 0.0009984970092773438
+
+1[Error] 2[O] 3[Error] 4[O] 
+Error Number : 0
+End Test: 1
+--------------------------------------------------
+Total Error: 2
+Avg Error: 2.0
+Total Time: 0.0009984970092773438 sec
+Avg Time: 0.0009984970092773438 sec

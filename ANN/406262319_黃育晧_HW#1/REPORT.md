@@ -16,7 +16,6 @@ title: ANN HW01
 * Two Neuron
     * 藉由二神經元將所有物件區分成四個區塊，每個測試資料丟進來皆必定屬於其中的某個區塊
 
-
 ### 時間差異
 我將二種方式皆進行1000次測試，並記錄在其進行訓練的時間
 * Four Neuron
@@ -39,16 +38,31 @@ title: ANN HW01
 * 觀察結果
     * 隨著Learning Rate的降低，所需的Epoch數量有所提升，尤其是在小於0.1之後更為明顯，且其出來的結果也有發現會有所不同，相比於Learning Rate設定成1時，其結果判定的一致性低了很多
 
+## TwoComponents V.S. ThreeComponents
+* 在只使用2個components的時候，由於data2中的資料有許多是無法只靠前面二個components就可分辨出來的，因此他會跑到所設定的Epoch上限才會停止
+* 其最終所分析出來的結果也都是錯誤的
+
 ## README
-* 直接執行 `py PerceptronLearning.py` 即可
-* `Line 10~30` 是使用二個神經元的初始宣告
-    * 會輸出在`TwoNeuron.out`檔裡
-* `Line 36~58` 是使用四個神經元的初始宣告
-    * 會輸出在`FourNeuron.out`檔裡
-* 使用其一要將另一個註解掉，同時存在會爛掉
-* `Line 195` 可更改`SetRange`的數值來決定要跑多少次測試
-    * 預設1000
-* LearningRate預設為1，`Line 222~223` 可拿掉註解更改其learningRate來觀察
-* 執行期間，`cmd` 會跑數字來告知現在執行到第幾次的測試
-* 執行 `py draw.py` 可顯示出現在使用的神經元的三維圖，會有該次訓練完畢的平面以及進行分類的各點位置
+
+* Two-neuron perceptron, dataset 1
+    * `py perceptronLearning.py 2N2C 0`
+    * output 檔: `TwoNeuron_Data1.out`
+* Two-neuron perceptron, dataset 2, two components
+    * `py perceptronLearning.py 2N2C`
+    * output 檔: `TwoNeuron.out`
+* Two-neuron perceptron, dataset 2, three components
+    * `py perceptronLearning.py 2N 1000`
+    * output 檔: `TwoNeuron_twoComponents.out`
+    * 1000 可更改成想讓其執行的次數
+* Four-neuron perceptron, dataset 1
+    * `py perceptronLearning.py 4N2C 0`
+    * output 檔: `FourNeuron_Data1.out`
+* Four-neuron perceptron, dataset 2, two components
+    * `py perceptronLearning.py 2N2C`
+    * output 檔: `FourNeuron.out`
+* Four-neuron perceptron, dataset 2, three components
+    * `py perceptronLearning.py 2N2C 1000`
+    * output 檔: `FourNeuron_twoComponents.out`
+    * 1000 可更改成想讓其執行的次數
+* 或是可直接執行 `run.bat` 可一次將上面的盡數跑完
 
