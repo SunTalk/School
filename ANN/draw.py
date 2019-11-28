@@ -31,6 +31,8 @@ def FinalChart() :
 	plt.show()
 
 if __name__ == "__main__":
+	CheckFile()
+	read_file()
 	init()
 	Traning()
 	StartTest()
