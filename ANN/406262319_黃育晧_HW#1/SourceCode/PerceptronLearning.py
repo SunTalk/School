@@ -79,11 +79,14 @@ def Traning() :
 	global Biases
 	global Epoch
 
+	LR = LRate
 	Epoch = 1;
 	Completed = False
 	while True :
 		if Epoch > EpochLimit or Completed:
 			break
+		if Epoch%10 == 0 and LR > 0.0001:
+			LR /= 10
 		Epoch += 1
 		Completed = True
 		for i in Data :
@@ -93,8 +96,8 @@ def Traning() :
 			e = i[1]-now
 			if NeedUpdate(e) :
 				Completed = False
-				Weight = Weight + LRate*e.dot(i[0].T)
-				Biases = Biases + LRate*e
+				Weight = Weight + LR*e.dot(i[0].T)
+				Biases = Biases + LR*e
 	# Traning
 
 
@@ -113,7 +116,8 @@ def Decide(K) :
 
 def StartTest() :
 	global TotalError
-
+	global ErrNum
+	
 	ErrNum = 0
 	kase = 1
 	Result.clear()
@@ -224,16 +228,16 @@ def CheckFile() :
 	elif sys.argv[1] == '2N2C' :
 		OutputFile = open("TwoNeuron_twoComponents.out", "w")
 		Weight = np.array([
-			[0.0, 0.0],
-			[0.0, 0.0]
+			[1.0, 0.0],
+			[0.0, 1.0]
 		])
 		Biases = np.array([
-			[0.0],[0.0]
+			[1.0],[1.0]
 		])
-		W = np.array([[0.0],[0.0]])
+		W = np.array([[1.0],[1.0]])
 		B = np.array([[0.0],[1.0]])
-		P = np.array([[1.0],[0.0]])
-		O = np.array([[1.0],[1.0]])
+		P = np.array([[0.0],[0.0]])
+		O = np.array([[1.0],[0.0]])
 	elif sys.argv[1] == '4N2C' :
 		OutputFile = open("FourNeuron_twoComponents.out", "w")
 		Weight = np.array([
