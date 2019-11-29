@@ -5,7 +5,7 @@ num = list()
 x = list()
 y = list()
 MAXN = 100000
-AVG = 20
+AVG = 10
 
 for i in range(130,160+1) :
 	x.append(i)
@@ -19,7 +19,8 @@ plt.title('All')
 plt.xlabel('Height')
 plt.ylabel('number')
 plt.bar(x,y)
-plt.show()
+plt.savefig('All.png')
+plt.close()
 
 for k in range(1,12):
 	for i in range(len(y)) :
@@ -35,8 +36,10 @@ for k in range(1,12):
 	plt.title('AVG'+str(AVG))
 	plt.xlabel('Height')
 	plt.ylabel('number')
+	plt.ylim(0,1500)
 	plt.bar(x,y)
-	plt.show()
+	plt.savefig('AVG'+str(AVG)+'.png')
+	plt.close()
 
 	AVG += 5
 
