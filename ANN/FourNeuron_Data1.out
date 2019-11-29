@@ -14,25 +14,25 @@ Biases:
 
 After Traning:
 Weight:
-[[ 2.  3.]
- [ 2. -1.]
- [-1.  2.]
- [-2. -2.]]
+[[ 2.14  2.24]
+ [ 2.   -1.  ]
+ [-1.    2.  ]
+ [-2.   -2.  ]]
 Biases:
-[[-5.]
- [-4.]
- [-4.]
- [-4.]]
+[[-4.36]
+ [-4.  ]
+ [-4.  ]
+ [-4.  ]]
 Learning Rate: 1
 
-End Epoch: 14
-Speed: 0.0009984970092773438
+End Epoch: 25
+Speed: 0.006871223449707031
 
 1[Error] 2[O] 3[Error] 4[O] 
-Error Number : 0
+Error Number : 2
 End Test: 1
 --------------------------------------------------
 Total Error: 2
 Avg Error: 2.0
-Total Time: 0.0009984970092773438 sec
-Avg Time: 0.0009984970092773438 sec
+Total Time: 0.006871223449707031 sec
+Avg Time: 0.006871223449707031 sec

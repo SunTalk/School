@@ -18,7 +18,7 @@ Biases:
 Learning Rate: 1
 
 End Epoch: 4
-Speed: 0.0
+Speed: 0.0009965896606445312
 
 1[W] 2[B] 3[P] 4[O] 
 Error Number : 0
@@ -26,5 +26,5 @@ End Test: 1
 --------------------------------------------------
 Total Error: 0
 Avg Error: 0.0
-Total Time: 0.0 sec
-Avg Time: 0.0 sec
+Total Time: 0.0009965896606445312 sec
+Avg Time: 0.0009965896606445312 sec
