@@ -26,6 +26,8 @@ EpochLimit = 10000
 LRate = 1
 
 def init() :
+	global Weight
+	global Biases
 	for i in range(len(Weight)) :
 		for j in range(len(Weight[i])):
 			Weight[i][j] = random.uniform(-10.0, 10.0)
@@ -85,8 +87,7 @@ def Traning() :
 	while True :
 		if Epoch > EpochLimit or Completed:
 			break
-		if Epoch%10 == 0 and LR > 0.0001:
-			LR /= 10
+
 		Epoch += 1
 		Completed = True
 		for i in Data :
@@ -234,9 +235,9 @@ def CheckFile() :
 		Biases = np.array([
 			[1.0],[1.0]
 		])
-		W = np.array([[1.0],[1.0]])
+		W = np.array([[0.0],[0.0]])
 		B = np.array([[0.0],[1.0]])
-		P = np.array([[0.0],[0.0]])
+		P = np.array([[1.0],[1.0]])
 		O = np.array([[1.0],[0.0]])
 	elif sys.argv[1] == '4N2C' :
 		OutputFile = open("FourNeuron_twoComponents.out", "w")
@@ -266,7 +267,7 @@ def main(SetRange) :
 		print(i) # monitor progress
 		print("Test {}:".format(i), file = OutputFile)
 
-		if len(sys.argv) < 3 :
+		if len(sys.argv) < 3 or sys.argv[2] != 0:
 			init()
 		print("\nInitial:", file = OutputFile)
 		WBprint()
@@ -288,8 +289,8 @@ def main(SetRange) :
 		print("End Test: {}".format(i), file = OutputFile)
 		print("--------------------------------------------------", file = OutputFile)
 		
-		if i%10 == 0 :
-			LRate -= 0.01
+		if i%100 == 0 :
+			LRate -= 0.09
 
 	print("Total Error: {}".format(TotalError), file = OutputFile)
 	print("Avg Error: {}".format(TotalError/SetRange), file = OutputFile)
