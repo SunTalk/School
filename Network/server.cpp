@@ -2,66 +2,54 @@
  
 #include <WinSock2.h>
 #include <iostream>
- 
+
+#define MAXN 1000
 using namespace std;
  
-int main(){
+int main(int argc, char* argv[]){
 
-	int r;
-	char message[200];
+	char message[MAXN];
+	//Winsocket-DLL 設定
 	WSAData wsaData;
 	WORD DLLVSERION;
-	DLLVSERION = MAKEWORD(2,1);//Winsocket-DLL 版本
+	DLLVSERION = MAKEWORD(2,1);
+	WSAStartup(DLLVSERION, &wsaData);
  
-	//用 WSAStartup 開始 Winsocket-DLL
-	r = WSAStartup(DLLVSERION, &wsaData);
- 
-	//宣告 socket 位址資訊(不同的通訊,有不同的位址資訊,所以會有不同的資料結構存放這些位址資訊)
 	SOCKADDR_IN addr;
 	int addrlen = sizeof(addr);
+	addr.sin_addr.s_addr = INADDR_ANY;
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(8080);
  
 	//建立 socket
-	SOCKET sListen; //listening for an incoming connection
-	SOCKET sConnect; //operating if a connection was found
- 
-	//AF_INET：表示建立的 socket 屬於 internet family
-	//SOCK_STREAM：表示建立的 socket 是 connection-oriented socket 
+	SOCKET sListen;
+	SOCKET sConnect;
+	// windows的socket中 AF_INET 跟 PF_INET 是一樣的可以混用
 	sConnect = socket(AF_INET, SOCK_STREAM, 0);
- 
-	//設定位址資訊的資料
-	addr.sin_addr.s_addr = inet_addr("127.0.0.1");
-	addr.sin_family = AF_INET;
-	addr.sin_port = htons(1234);
- 
-	//設定 Listen
 	sListen = socket(AF_INET, SOCK_STREAM, 0);
-	bind(sListen, (SOCKADDR*)&addr, sizeof(addr));
-	listen(sListen, SOMAXCONN);//SOMAXCONN: listening without any limit
+	bind(sListen, (SOCKADDR*)&addr, sizeof(addr));//將addr的資訊綁到socket上
+	listen(sListen, 3);//上線人數無限制
  
 	//等待連線
 	SOCKADDR_IN clinetAddr;
 	while(true)
 	{
-		cout << "waiting..." << endl;
- 
+ 		cout << "Waiting..." << endl;
 		if(sConnect = accept(sListen, (SOCKADDR*)&clinetAddr, &addrlen))
 		{
-			cout << "a connection was found" << endl;
-			printf("server: got connection from %s\n", inet_ntoa(addr.sin_addr));
+			cout<< "got connect" << inet_ntoa(clinetAddr.sin_addr) << endl;
  
 			//傳送訊息給 client 端
-			char sendbuf[] = "Give me a word:";
+			FILE *fp = fopen("send.txt","r");
+			char sendbuf[MAXN],str;
+			int len = 0;
+			while( ~(str = fgetc(fp)) )
+				sendbuf[len++] = str;
+			sendbuf[len++] = '\0';
 			send(sConnect, sendbuf, (int)strlen(sendbuf), 0);
 			
-			ZeroMemory(message, 200);
-			r = recv(sConnect, message, sizeof(message), 0);
-			cout << message << endl;
-			cout << "End Message\n";
+		}
 
-		}
-		else{
-			cout << "Failed\n";
-		}
 	}
 	
 	return 0;
