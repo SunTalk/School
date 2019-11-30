@@ -77,8 +77,33 @@
 </ul>
 </li>
 </ul><h2 id="TwoComponents-VS-ThreeComponents"><a class="anchor hidden-xs" href="#TwoComponents-VS-ThreeComponents" title="TwoComponents-VS-ThreeComponents"><span class="octicon octicon-link"></span></a>TwoComponents V.S. ThreeComponents</h2><ul>
-<li>在只使用2個components的時候，由於data2中的資料有許多是無法只靠前面二個components就可分辨出來的，因此他會跑到所設定的Epoch上限才會停止</li>
-<li>其最終所分析出來的結果也都是錯誤的</li>
+<li>
+<p>這是用draw.py畫出的training_data2只有2個components的情況<br>
+<img src="https://i.imgur.com/cT8mxdw.png"></p>
+</li>
+<li>
+<p>紅色是<code>W</code>,綠色是<code>B</code>,藍色是<code>P</code>,黑色是<code>O</code></p>
+</li>
+<li>
+<p>在這次的data下需要將其用2個神經元分出來的話，那2個神經元必須是中間的二條線，而紅色(W)與藍色§在位置上是相對的，其對應2個神經元的輸出應完全相反，綠(B)與黑(O)亦是如此。</p>
+<ul>
+<li>原先設定之輸出<code>W(0,0)</code>，<code>B(0,1)</code>，<code>P(1,0)</code>，<code>O(1,1)</code>，沒辦法train出答案</li>
+<li>因此我設定其為<code>W(0,0)</code>，<code>B(0,1)</code>，<code>P(1,1)</code>，<code>O(1,0)</code></li>
+</ul>
+</li>
+<li>
+<p>在四個神經元的情況下1000次的ErrorNumber</p>
+<ul>
+<li>TwoCoponents: 每次平均5個左右</li>
+<li>ThreeComponents: 每次平均2個左右</li>
+</ul>
+</li>
+<li>
+<p>可以發現在TwoComponents的情況下其ErrorNumber的數量會增加頗多</p>
+</li>
+<li>
+<p>可以得出在Components越多的情況下其準確率應該是越高的</p>
+</li>
 </ul><h2 id="README"><a class="anchor hidden-xs" href="#README" title="README"><span class="octicon octicon-link"></span></a>README</h2><ul>
 <li>Two-neuron perceptron, dataset 1
 <ul>
@@ -88,8 +113,9 @@
 </li>
 <li>Two-neuron perceptron, dataset 2, two components
 <ul>
-<li><code>py perceptronLearning.py 2N2C</code></li>
+<li><code>py perceptronLearning.py 2N2C 1000</code></li>
 <li>output 檔: <code>TwoNeuron.out</code></li>
+<li>1000 可更改成想讓其執行的次數</li>
 </ul>
 </li>
 <li>Two-neuron perceptron, dataset 2, three components
@@ -107,8 +133,9 @@
 </li>
 <li>Four-neuron perceptron, dataset 2, two components
 <ul>
-<li><code>py perceptronLearning.py 2N2C</code></li>
+<li><code>py perceptronLearning.py 2N2C 1000</code></li>
 <li>output 檔: <code>FourNeuron.out</code></li>
+<li>1000 可更改成想讓其執行的次數</li>
 </ul>
 </li>
 <li>Four-neuron perceptron, dataset 2, three components
@@ -128,14 +155,14 @@
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
 <li class=""><a href="#類神經網路作業一" title="類神經網路作業一">類神經網路作業一</a><ul class="nav">
-<li><a href="#TwoNeuron-VS-FourNeuron" title="TwoNeuron V.S. FourNeuron">TwoNeuron V.S. FourNeuron</a><ul class="nav">
-<li><a href="#Error" title="Error">Error</a></li>
-<li><a href="#時間差異" title="時間差異">時間差異</a></li>
+<li class=""><a href="#TwoNeuron-VS-FourNeuron" title="TwoNeuron V.S. FourNeuron">TwoNeuron V.S. FourNeuron</a><ul class="nav">
+<li class=""><a href="#Error" title="Error">Error</a></li>
+<li class=""><a href="#時間差異" title="時間差異">時間差異</a></li>
 </ul>
 </li>
-<li><a href="#Different-Initial-WeightsBiases" title="Different Initial Weights/Biases">Different Initial Weights/Biases</a></li>
+<li class=""><a href="#Different-Initial-WeightsBiases" title="Different Initial Weights/Biases">Different Initial Weights/Biases</a></li>
 <li class=""><a href="#Different-Learning-Rate" title="Different Learning Rate">Different Learning Rate</a></li>
-<li><a href="#TwoComponents-VS-ThreeComponents" title="TwoComponents V.S. ThreeComponents">TwoComponents V.S. ThreeComponents</a></li>
+<li class=""><a href="#TwoComponents-VS-ThreeComponents" title="TwoComponents V.S. ThreeComponents">TwoComponents V.S. ThreeComponents</a></li>
 <li><a href="#README" title="README">README</a></li>
 </ul>
 </li>
@@ -147,14 +174,14 @@
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
         <div class="toc"><ul class="nav">
 <li class=""><a href="#類神經網路作業一" title="類神經網路作業一">類神經網路作業一</a><ul class="nav">
-<li><a href="#TwoNeuron-VS-FourNeuron" title="TwoNeuron V.S. FourNeuron">TwoNeuron V.S. FourNeuron</a><ul class="nav">
-<li><a href="#Error" title="Error">Error</a></li>
-<li><a href="#時間差異" title="時間差異">時間差異</a></li>
+<li class=""><a href="#TwoNeuron-VS-FourNeuron" title="TwoNeuron V.S. FourNeuron">TwoNeuron V.S. FourNeuron</a><ul class="nav">
+<li class=""><a href="#Error" title="Error">Error</a></li>
+<li class=""><a href="#時間差異" title="時間差異">時間差異</a></li>
 </ul>
 </li>
-<li><a href="#Different-Initial-WeightsBiases" title="Different Initial Weights/Biases">Different Initial Weights/Biases</a></li>
+<li class=""><a href="#Different-Initial-WeightsBiases" title="Different Initial Weights/Biases">Different Initial Weights/Biases</a></li>
 <li class=""><a href="#Different-Learning-Rate" title="Different Learning Rate">Different Learning Rate</a></li>
-<li><a href="#TwoComponents-VS-ThreeComponents" title="TwoComponents V.S. ThreeComponents">TwoComponents V.S. ThreeComponents</a></li>
+<li class=""><a href="#TwoComponents-VS-ThreeComponents" title="TwoComponents V.S. ThreeComponents">TwoComponents V.S. ThreeComponents</a></li>
 <li><a href="#README" title="README">README</a></li>
 </ul>
 </li>
