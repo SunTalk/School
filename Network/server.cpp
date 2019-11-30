@@ -1,7 +1,7 @@
 #pragma comment(lib, "Ws2_32.lib")
- 
+
+#include <bits/stdc++.h>
 #include <WinSock2.h>
-#include <iostream>
 
 #define MAXN 1000
 using namespace std;
@@ -20,7 +20,7 @@ int main(int argc, char* argv[]){
 	addr.sin_addr.s_addr = INADDR_ANY;
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(8080);
- 
+
 	//建立 socket
 	SOCKET sListen;
 	SOCKET sConnect;
@@ -28,17 +28,16 @@ int main(int argc, char* argv[]){
 	sConnect = socket(AF_INET, SOCK_STREAM, 0);
 	sListen = socket(AF_INET, SOCK_STREAM, 0);
 	bind(sListen, (SOCKADDR*)&addr, sizeof(addr));//將addr的資訊綁到socket上
-	listen(sListen, 3);//上線人數無限制
- 
-	//等待連線
+	listen(sListen, 3);
+
 	SOCKADDR_IN clinetAddr;
 	while(true)
 	{
- 		cout << "Waiting..." << endl;
+		cout << "Waiting..." << endl;
 		if(sConnect = accept(sListen, (SOCKADDR*)&clinetAddr, &addrlen))
 		{
 			cout<< "got connect" << inet_ntoa(clinetAddr.sin_addr) << endl;
- 
+
 			//傳送訊息給 client 端
 			FILE *fp = fopen("send.txt","r");
 			char sendbuf[MAXN],str;

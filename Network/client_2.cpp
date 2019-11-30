@@ -4,13 +4,13 @@
 #include <WinSock2.h>
 
 #define MAXN 1000
-#define IP "127.0.0.1"
+#define IP "192.168.1.102"
 using namespace std;
 
 int main(int argc, char* argv[]){	
 
-	freopen("got.txt","w",stdout);
-	
+	freopen("got_2.txt","w",stdout);
+
 	string confirm;
 	char message[MAXN];
  
