@@ -5,6 +5,8 @@
 * [x] uva10152 - ShellSort
 * [x] uva10930 - A-Sequence
 * [x] uva10555 - Dead Fraction
+* [x] uva11057 - Exact Sum
+* [ ] uva11096 - Nails
 
 ### 信宏
 * [ ] uva1292 - Strategic game
