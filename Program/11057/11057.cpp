@@ -3,7 +3,7 @@
 using namespace std;
 
 #define USE_CPPIO() ios_base::sync_with_stdio(0); cin.tie(0)
-#define MAXN 100
+#define MAXN 10000
 #define INF 0x3f3f3f3f
 #define DEVIATION 0.00000005
 
