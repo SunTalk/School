@@ -45,9 +45,9 @@ def main(HiddenNum,LRate) :
 
 	Epoch = 1
 	EpochLimit = 1000000
-	while Epoch < EpochLimit and Network.countError(TrainData) > 0.01 :
+	while Epoch < EpochLimit and Network.EerrorRMSE(TrainData) > 0.15 :
 		Network.train(TrainData)
-		print("Train {}, {}".format(Epoch,Network.countError(TrainData)))
+		print("For HiddenNum {}, LRate {} : Epoch {}, ErrNum {}".format(HiddenNum,LRate,Epoch,Network.EerrorRMSE(TrainData)))
 		Epoch += 1
 	# Training Data
 
@@ -75,13 +75,12 @@ def main(HiddenNum,LRate) :
 	print("-----------------------------------", file = OutputFile)
 
 
-LRate = [1.0, 0.5, 0.1]
-HiddenNum = [1, 5, 10, 15, 30, 50]
+LRate = [1.0, 0.8, 0.6]
+HiddenNum = [5, 10, 15, 30]
 
 if __name__ == "__main__" :
 	readFile()
 	for i in HiddenNum :
 		for j in LRate :
 			main(i,j)
-			print("Completed {},{}".format(i,j))
 

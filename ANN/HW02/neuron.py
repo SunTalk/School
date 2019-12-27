@@ -108,13 +108,13 @@ class NeuralNetwork(object):
 			self.update(self.learningRate)
 	# 訓練資料
 
-	def countError(self,data) :
+	def EerrorRMSE(self,data) :
 		totalError = 0
 		for inputs, outputs in data :
 			actualOutput = self.feedForward(inputs)
 			for i in range(len(outputs)) :
 				totalError += (outputs[i] - actualOutput[i])**2
-		return math.sqrt(totalError)/len(data)
+		return math.sqrt(totalError/len(data))
 	# 得到error的數值
 
 	def changeOutput(self,x):
