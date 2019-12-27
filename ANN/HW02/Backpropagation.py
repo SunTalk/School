@@ -9,9 +9,6 @@ OutputFile = open("Output.out","w")
 TrainData = []
 TestData = []
 
-LRate = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
-HiddenNum = [1, 5, 10, 20, 30, 40, 50]
-
 def readFile() :
 
 	global TrainData
@@ -47,8 +44,8 @@ def main(HiddenNum,LRate) :
 	Network.addLayer(OutputLayer)
 
 	Epoch = 1
-	EpochLimit = 1000
-	while Epoch < EpochLimit :
+	EpochLimit = 1000000
+	while Epoch < EpochLimit and Network.countError(TrainData) > 0.01 :
 		Network.train(TrainData)
 		print("Train {}, {}".format(Epoch,Network.countError(TrainData)))
 		Epoch += 1
@@ -57,8 +54,8 @@ def main(HiddenNum,LRate) :
 	print("Number of hidden neurons = {}".format(HiddenNum), file=OutputFile)
 	print("Learning rates = {}".format(LRate), file= OutputFile)
 
-	AC = 0
 	# print("**********************", file=OutputFile)
+	AC = 0
 	for inputs,outputs in TrainData :
 		# print("{}, {}".format(Network.getOutput(inputs),outputs), file=OutputFile)
 		if Network.getOutput(inputs) == outputs :
@@ -66,16 +63,20 @@ def main(HiddenNum,LRate) :
 	# print("**********************", file=OutputFile)
 	print("training accuracies = {}%".format(AC/len(TrainData)*100), file=OutputFile)
 	
-	AC = 0
 	# print("**********************", file=OutputFile)
+	AC = 0
 	for inputs,outputs in TestData :
 		# print("{}, {}".format(Network.getOutput(inputs),outputs), file=OutputFile)
 		if Network.getOutput(inputs) == outputs :
 			AC += 1
 	# print("**********************", file=OutputFile)
-	print("training accuracies = {}%".format(AC/len(TestData)*100), file=OutputFile)
+	print("test accuracies = {}%".format(AC/len(TestData)*100), file=OutputFile)
 	print("epochs = {}".format(Epoch), file=OutputFile)
 	print("-----------------------------------", file = OutputFile)
+
+
+LRate = [1.0, 0.5, 0.1]
+HiddenNum = [1, 5, 10, 15, 30, 50]
 
 if __name__ == "__main__" :
 	readFile()
@@ -83,19 +84,4 @@ if __name__ == "__main__" :
 		for j in LRate :
 			main(i,j)
 			print("Completed {},{}".format(i,j))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

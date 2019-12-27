@@ -114,18 +114,19 @@ class NeuralNetwork(object):
 			actualOutput = self.feedForward(inputs)
 			for i in range(len(outputs)) :
 				totalError += (outputs[i] - actualOutput[i])**2
-		return math.sqrt(totalError/len(data))
+		return math.sqrt(totalError)/len(data)
 	# 得到error的數值
-	
-	def hardlim(self,x):
-		if x >= 0.5 :
-			return 1.0
-		return 0.0
-	# hardlim fun
+
+	def changeOutput(self,x):
+		if x[0] > x[1] and x[0] > x[2] :
+			return [0.9, 0.1, 0.1]
+		if x[1] > x[0] and x[1] > x[2] :
+			return [0.1, 0.9, 0.1]
+		if x[2] > x[0] and x[2] > x[1] :
+			return [0.1, 0.1, 0.9]
 
 	def getOutput(self, inputs) :
 		OUT = self.feedForward(inputs)
-		for i in range(len(OUT)) :
-			OUT[i] = self.hardlim(OUT[i])
+		OUT = self.changeOutput(OUT)
 		return OUT
 
