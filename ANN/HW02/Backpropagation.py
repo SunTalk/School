@@ -6,6 +6,7 @@ from neuron import *
 TraningFile = open("iris_training_data.txt","r")
 TestFile = open("iris_testing_data.txt","r")
 OutputFile = open("Output.out","w")
+RecordFile = open("Record.txt","w")
 TrainData = []
 TestData = []
 
@@ -44,13 +45,15 @@ def main(HiddenNum,LRate) :
 	Network.addLayer(OutputLayer)
 
 	Epoch = 1
-	EpochLimit = 1000000
+	EpochLimit = 100000
 	while Epoch < EpochLimit and Network.EerrorRMSE(TrainData) > 0.15 :
 		Network.train(TrainData)
 		print("For HiddenNum {}, LRate {} : Epoch {}, ErrNum {}".format(HiddenNum,LRate,Epoch,Network.EerrorRMSE(TrainData)))
+		print("For HiddenNum {}, LRate {} : Epoch {}, ErrNum {}".format(HiddenNum,LRate,Epoch,Network.EerrorRMSE(TrainData)),file = RecordFile )
 		Epoch += 1
 	# Training Data
-
+	print("--------------------------------------------------------------------------------------",file = RecordFile)
+	
 	print("Number of hidden neurons = {}".format(HiddenNum), file=OutputFile)
 	print("Learning rates = {}".format(LRate), file= OutputFile)
 
@@ -75,12 +78,22 @@ def main(HiddenNum,LRate) :
 	print("-----------------------------------", file = OutputFile)
 
 
-LRate = [1.0, 0.8, 0.6]
+LRate = [1.0, 0.5, 0.1]
 HiddenNum = [5, 10, 15, 30]
+OutFile = ["Output1.out","Output2.out","Output3.out","Output4.out","Output5.out","Output6.out","Output7.out","Output8.out","Output9.out","Output10.out"]
+Record = ["Record1.txt","Record2.txt","Record3.txt","Record4.txt","Record5.txt","Record6.txt","Record7.txt","Record8.txt","Record9.txt","Record10.txt"]
 
 if __name__ == "__main__" :
 	readFile()
-	for i in HiddenNum :
-		for j in LRate :
-			main(i,j)
+	main(10,0.5)
+
+	# for k in range(len(OutFile)) :
+	# 	OutputFile = open(OutFile[k],"w")
+	# 	RecordFile = open(Record[k],"w")
+	# 	Tstart = time.time()
+	# 	for i in HiddenNum :
+	# 		for j in LRate :
+	# 			main(i,j)
+	# 	Tend = time.time()
+	# 	print("Speed time : {}".format(Tend - Tstart),file=RecordFile)
 

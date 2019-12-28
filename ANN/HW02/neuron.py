@@ -13,6 +13,7 @@ class Neuron(object):
 		for i in range(weightNum):
 			self.weights.append(random.uniform(0.0, 1.0))
 
+
 	def sigmoid(self,x) :
 		return 1/(1+math.exp(-x))
 
@@ -124,6 +125,7 @@ class NeuralNetwork(object):
 			return [0.1, 0.9, 0.1]
 		if x[2] > x[0] and x[2] > x[1] :
 			return [0.1, 0.1, 0.9]
+	# 將output轉化為決定的陣列
 
 	def getOutput(self, inputs) :
 		OUT = self.feedForward(inputs)
