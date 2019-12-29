@@ -9,7 +9,7 @@
 * [ ] uva11096 - Nails
 
 ### 信宏
-* [ ] uva1292 - Strategic game
+* [x] uva1292 - Strategic game
 * [x] uva10342 - Always Late
 * [x] uva11790 - Murcia's Skyline
 * [x] uva108 - Maximum Sum
