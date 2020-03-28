@@ -2,8 +2,8 @@ import random
 
 def Secant(fun, mmin, mmax, epsilon):
 
-	a = random.uniform(mmin, mmax)
-	b = random.uniform(mmin, mmax)
+	a = random.randint(mmin, mmax)
+	b = random.randint(mmin, mmax)
 
 	cnt = 0
 	while( abs(a-b) >= epsilon ):

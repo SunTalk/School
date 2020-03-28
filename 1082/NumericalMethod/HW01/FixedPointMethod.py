@@ -1,4 +1,5 @@
 import random
+import math
 
 def FixPoint(fun, mmin, mmax, epsilon):
 
@@ -11,5 +12,9 @@ def FixPoint(fun, mmin, mmax, epsilon):
 		
 		old = x
 		x = fun(x)
+
+		if( x == math.inf or cnt == 10000):
+			return x,cnt
+
 
 	return x,cnt

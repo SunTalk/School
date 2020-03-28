@@ -2,7 +2,7 @@ import random
 
 def Newton(fun, fundif, mmin, mmax, epsilon):
 
-	x = random.uniform(mmin, mmax)
+	x = random.randint(mmin, mmax)
 	delta = -fun(x)/fundif(x)
 
 	cnt = 0

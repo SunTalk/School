@@ -4,10 +4,10 @@ def ModifyFalsePosition(fun, mmin, mmax, epsilon):
 
 	a = 1
 	while( fun(a) < 0 ):
-		a = random.uniform(mmin, mmax)
+		a = random.randint(mmin, mmax)
 	b = 1
 	while( fun(b) > 0 ):
-		b = random.uniform(mmin, mmax)
+		b = random.randint(mmin, mmax)
 
 	old = a
 	new = b
