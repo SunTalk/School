@@ -9,31 +9,38 @@ TIME = open("time.out","w")
 
 for N in num:
 
-	tStart = time.time()
+	
 
-	print("* {}".format(N),file = OUT)
+	# print("* {}".format(N),file = OUT)
 
 	A = np.zeros(N*N).reshape(N,N)
 	B = np.zeros(N)
 
+	tRs = time.time()
 	for i in range(N):
-		print("$",end="",file=OUT)
 		for j in range(N):
 			A[i,j] = random.randint(-10,10)
-			if A[i][j] >= 0 and j != 0 :
-				print("+",end="",file=OUT) 
-			print("{}X_{{{}}}".format(A[i,j],j),end="",file=OUT)
 		B[i] = random.randint(-10,10)
-		print(" = {}$".format(B[i]),file=OUT)
+	tRe = time.time()
 
+	if N <= 100 :
+		for i in range(N):
+			print("$",end="",file=OUT)
+			for j in range(N):
+				if A[i][j] >= 0 and j != 0 :
+					print("+",end="",file=OUT) 
+				print("{}X_{{{}}}".format(A[i,j],j),end="",file=OUT)
+			print(" = {}$".format(B[i]),file=OUT)
+
+	tStart = time.time()
 	X = np.linalg.solve(A,B)
-
-	for i in range(N):
-		print("$X_{{{}}} = {:.6f}$".format(i,X[i]),file=OUT)
-	
-	# print("---------------",file = OUT)
-
 	tEnd = time.time()
+
+	if N <= 100 :
+		for i in range(N):
+			print("$X_{{{}}} = {:.6f}$".format(i,X[i]),file=OUT)
+		print("---------------",file = OUT)
+
 	print("{:>4d}".format(N),end=" : ",file=TIME)
-	print("{:.6f}".format(tEnd - tStart),file=TIME)
+	print("{:.6f},{:.6f}".format((tEnd - tStart),(tRe-tRs)),file=TIME)
 	print(N)
