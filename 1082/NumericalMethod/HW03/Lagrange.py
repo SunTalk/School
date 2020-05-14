@@ -1,12 +1,17 @@
 import matplotlib.pyplot as plt
 
-def Lagrange(dataX,dataY,fun):
+def Lagrangefun(dataX,dataY,OUT):
 
+    MINX = 10.0
+    MAXX = -10.0
+    for i in range(len(dataX)):
+        MINX = min(dataX[i],MINX)
+        MAXX = max(dataX[i],MAXX)
+
+    x = MINX
     resX = list()
     resY = list()
-
-    x = 2.5
-    for k in range(5000):
+    while x <= MAXX :
         ans = 0
         for i in range(len(dataX)):
             tmp = 1
@@ -20,24 +25,11 @@ def Lagrange(dataX,dataY,fun):
         resY.append(ans)
         x += 0.001
 
-    plt.plot(resX,resY,'r:')
+    plt.cla()
+    plt.clf()
+    plt.title("Lagrange"+OUT)
+    ORI, = plt.plot(dataX,dataY,'bo')
+    RES, = plt.plot(resX,resY,'r:')
+    plt.legend([RES,ORI],["Result","Origin"])
 
-    oriX = list()
-    oriY = list()
-
-    x = 2.5
-    for k in range(5000):
-        oriX.append(x)
-        oriY.append(fun(x))
-        x += 0.001
-
-    plt.plot(oriX,oriY,'b:')
-    
-    plt.show()
-
-
-
-
-
-
-
+    plt.savefig("./out/Lagrange/"+OUT+".png")
