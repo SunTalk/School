@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def GregoryBackwardfun(dataX,dataY,OUT):
+def GregoryBackwardfun(dataX,dataY,MINX,MAXX,OUT):
 
     DiffTable = list()
     DiffTable.append(dataY)
@@ -9,15 +9,7 @@ def GregoryBackwardfun(dataX,dataY,OUT):
         for j in range(0,len(dataX)-i):
             Tableset.append(DiffTable[i-1][j+1]-DiffTable[i-1][j])
         DiffTable.append(Tableset)
-    
-    # for i in range(len(DiffTable)):
-    #     print(DiffTable[i])
 
-    MINX = 10.0
-    MAXX = -10.0
-    for i in range(len(dataX)):
-        MINX = min(dataX[i],MINX)
-        MAXX = max(dataX[i],MAXX)
     H = dataX[1]-dataX[0]
 
     x = MINX

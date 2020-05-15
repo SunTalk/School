@@ -1,12 +1,6 @@
 import matplotlib.pyplot as plt
 
-def Lagrangefun(dataX,dataY,OUT):
-
-    MINX = 10.0
-    MAXX = -10.0
-    for i in range(len(dataX)):
-        MINX = min(dataX[i],MINX)
-        MAXX = max(dataX[i],MAXX)
+def Lagrangefun(dataX,dataY,MINX,MAXX,OUT):
 
     x = MINX
     resX = list()
